@@ -3,13 +3,13 @@ package com.yiyo.appcatalog.ui.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +17,16 @@ import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.yiyo.appcatalog.R;
+import com.yiyo.appcatalog.model.entities.Feed;
+import com.yiyo.appcatalog.model.rest.APIService;
+import com.yiyo.appcatalog.model.rest.RestClient;
 import com.yiyo.appcatalog.utils.ItemAnimatorFactory;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +37,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        onFakeCreate();
+        APIService apiService = RestClient.getApiService();
+        apiService.getTopFreeiOSApps().enqueue(new Callback<Feed>() {
+            @Override
+            public void onResponse(Call<Feed> call, Response<Feed> response) {
+                if (response.isSuccess()) {
+                    System.out.println("El body de la respuesta es: " + response.body().getFeed());
+                }
+                onFakeCreate();
+            }
+
+            @Override
+            public void onFailure(Call<Feed> call, Throwable t) {
+                Log.e(MainActivity.class.getSimpleName(), t.getMessage());
+            }
+        });
     }
 
     private void onFakeCreate() {
