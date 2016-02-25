@@ -3,6 +3,7 @@ package com.yiyo.appcatalog.ui.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +18,16 @@ import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.yiyo.appcatalog.R;
-import com.yiyo.appcatalog.model.entities.Feed;
 import com.yiyo.appcatalog.model.rest.APIService;
 import com.yiyo.appcatalog.model.rest.RestClient;
+import com.yiyo.appcatalog.model.rest.models.Feed;
+import com.yiyo.appcatalog.mvp.presenters.CategoriesPresenter;
+import com.yiyo.appcatalog.mvp.views.CategoriesView;
+import com.yiyo.appcatalog.ui.adapters.CategoriesAdapter;
 import com.yiyo.appcatalog.utils.ItemAnimatorFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,23 +35,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CategoriesView {
 
     @Bind(R.id.text_title) TextView titleTextView;
     @Bind(R.id.recycler) RecyclerView recyclerView;
     @Bind(R.id.toolbar) Toolbar toolbar;
 
+    private CategoriesPresenter categoriesPresenter;
+    private List<String> categories;
+    private CategoriesAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        categoriesPresenter = new CategoriesPresenter(this);
+        categories = new ArrayList<>();
+
         APIService apiService = RestClient.getApiService();
         apiService.getTopFreeiOSApps().enqueue(new Callback<Feed>() {
             @Override
             public void onResponse(Call<Feed> call, Response<Feed> response) {
                 if (response.isSuccess()) {
-                    System.out.println("El body de la respuesta es: " + response.body().getFeed());
+                    categoriesPresenter.saveAndLoadCategories(response.body().getFeed());
+                    onFakeCreate();
                 }
-                onFakeCreate();
             }
 
             @Override
@@ -61,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         ViewCompat.animate(titleTextView).alpha(1);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(ItemAnimatorFactory.slidein());
+        adapter = new CategoriesAdapter();
+        recyclerView.setAdapter(adapter);
 
         toolbar.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
@@ -98,8 +114,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-
+                adapter.addAll(categories);
             }
         });
+    }
+
+    @Override
+    public Context getContext() {
+        return MainActivity.this;
+    }
+
+    @Override
+    public void fetchCategories(List<String> returnedCategories) {
+        categories = returnedCategories;
     }
 }
