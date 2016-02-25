@@ -11,4 +11,9 @@
     <style name="AppTheme.SplashAnimation">
         <item name="android:windowBackground">@drawable/toolbar_placeholder</item>
     </style>
+
+    <style name="Theme.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

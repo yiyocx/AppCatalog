@@ -35,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements CategoriesView {
+public class CategorySelectionActivity extends AppCompatActivity implements CategoriesView {
 
     @Bind(R.id.text_title) TextView titleTextView;
     @Bind(R.id.recycler) RecyclerView recyclerView;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements CategoriesView {
 
             @Override
             public void onFailure(Call<Feed> call, Throwable t) {
-                Log.e(MainActivity.class.getSimpleName(), t.getMessage());
+                Log.e(CategorySelectionActivity.class.getSimpleName(), t.getMessage());
                 categoriesPresenter.loadOfflineCategories();
                 onFakeCreate();
             }
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements CategoriesView {
 
     @Override
     public Context getContext() {
-        return MainActivity.this;
+        return CategorySelectionActivity.this;
     }
 
     @Override

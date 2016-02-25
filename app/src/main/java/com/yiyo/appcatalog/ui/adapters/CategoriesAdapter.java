@@ -1,5 +1,6 @@
 package com.yiyo.appcatalog.ui.adapters;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yiyo.appcatalog.R;
+import com.yiyo.appcatalog.ui.activities.AppsCategoryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +55,16 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         @Bind(R.id.category_name) TextView categoryText;
         @Bind(R.id.category_color) TextView categoryColor;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), AppsCategoryActivity.class);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
