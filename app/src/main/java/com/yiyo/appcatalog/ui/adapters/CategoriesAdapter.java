@@ -1,5 +1,6 @@
 package com.yiyo.appcatalog.ui.adapters;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.yiyo.appcatalog.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +33,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         String category = categories.get(position);
         holder.categoryText.setText(category);
+        Random random = new Random();
+        holder.categoryColor.setBackgroundColor(Color.argb(255, random.nextInt(255),
+                random.nextInt(255), random.nextInt(255)));
     }
 
     @Override
@@ -45,7 +50,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.category) TextView categoryText;
+        @Bind(R.id.category_name) TextView categoryText;
+        @Bind(R.id.category_color) TextView categoryColor;
 
         public ViewHolder(View itemView) {
             super(itemView);
