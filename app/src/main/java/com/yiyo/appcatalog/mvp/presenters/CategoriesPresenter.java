@@ -26,4 +26,11 @@ public class CategoriesPresenter {
         categoriesUseCase.closeDatabase();
         categoriesView.fetchCategories(categories);
     }
+
+    public String getTitle() {
+        categoriesUseCase.openDatabase();
+        String title = categoriesUseCase.getTitle();
+        categoriesUseCase.closeDatabase();
+        return title;
+    }
 }

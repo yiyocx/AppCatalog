@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements CategoriesView {
                         collapseToolbar(contentViewHeight);
                         return true;
                     }
-            });
+                });
     }
 
     private void collapseToolbar(int contentViewHeight) {
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements CategoriesView {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
+                titleTextView.setText(categoriesPresenter.getTitle());
                 adapter.addAll(categories);
             }
         });

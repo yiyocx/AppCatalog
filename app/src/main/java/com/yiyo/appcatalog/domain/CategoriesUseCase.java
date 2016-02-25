@@ -19,8 +19,8 @@ public class CategoriesUseCase {
     }
 
     public void save(Feed_ feed) {
-        long feedId = datasource.saveFeed(feed);
         datasource.deleteAllFeed();
+        long feedId = datasource.saveFeed(feed);
         datasource.saveEntryApps(feedId, feed.getEntry());
     }
 
@@ -29,11 +29,18 @@ public class CategoriesUseCase {
         return allCategories;
     }
 
+
+
     public void openDatabase() {
         datasource.open();
     }
 
     public void closeDatabase() {
         datasource.close();
+    }
+
+    public String getTitle() {
+        String titleApp = datasource.getTitleApp();
+        return  titleApp;
     }
 }

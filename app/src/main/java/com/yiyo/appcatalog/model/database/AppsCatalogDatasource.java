@@ -90,4 +90,13 @@ public class AppsCatalogDatasource {
         cursor.close();
         return categories;
     }
+
+    public String getTitleApp() {
+        Cursor cursor = database.query(Feed.TABLE_NAME, null, null, null, null,
+                null, null, null);
+        cursor.moveToFirst();
+        String title = cursor.getString(cursor.getColumnIndex(Feed.COLUMN_TITLE));
+        cursor.close();
+        return title;
+    }
 }
