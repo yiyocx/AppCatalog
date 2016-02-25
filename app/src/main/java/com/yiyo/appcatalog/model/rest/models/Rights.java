@@ -1,6 +1,6 @@
-package com.yiyo.appcatalog.model.entities;
+package com.yiyo.appcatalog.model.rest.models;
 
-public class ImName {
+public class Rights {
 
     private String label;
 

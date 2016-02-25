@@ -1,21 +1,36 @@
-package com.yiyo.appcatalog.model.entities;
+package com.yiyo.appcatalog.model.rest.models;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Entry {
 
+    @SerializedName("im:name")
     private ImName imName;
+
+    @SerializedName("im:image")
     private List<ImImage> imImage = new ArrayList<>();
+
     private Summary summary;
+
+    @SerializedName("im:price")
     private ImPrice imPrice;
+
+    @SerializedName("im:contentType")
     private ImContentType imContentType;
+
     private Rights rights;
     private Title title;
     private Link link;
     private Id id;
+
+    @SerializedName("im:artist")
     private ImArtist imArtist;
     private Category category;
+
+    @SerializedName("im:releaseDate")
     private ImReleaseDate imReleaseDate;
 
     /**

@@ -1,6 +1,6 @@
-package com.yiyo.appcatalog.model.entities;
+package com.yiyo.appcatalog.model.rest.models;
 
-public class Summary {
+public class Attributes_______ {
 
     private String label;
 

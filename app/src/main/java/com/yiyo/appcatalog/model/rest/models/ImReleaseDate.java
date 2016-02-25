@@ -1,9 +1,9 @@
-package com.yiyo.appcatalog.model.entities;
+package com.yiyo.appcatalog.model.rest.models;
 
-public class ImPrice {
+public class ImReleaseDate {
 
     private String label;
-    private Attributes_ attributes;
+    private Attributes_______ attributes;
 
     /**
      *
@@ -28,7 +28,7 @@ public class ImPrice {
      * @return
      * The attributes
      */
-    public Attributes_ getAttributes() {
+    public Attributes_______ getAttributes() {
         return attributes;
     }
 
@@ -37,7 +37,7 @@ public class ImPrice {
      * @param attributes
      * The attributes
      */
-    public void setAttributes(Attributes_ attributes) {
+    public void setAttributes(Attributes_______ attributes) {
         this.attributes = attributes;
     }
 

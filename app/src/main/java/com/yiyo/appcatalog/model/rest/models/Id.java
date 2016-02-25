@@ -1,9 +1,9 @@
-package com.yiyo.appcatalog.model.entities;
+package com.yiyo.appcatalog.model.rest.models;
 
-public class ImImage {
+public class Id {
 
     private String label;
-    private Attributes attributes;
+    private Attributes____ attributes;
 
     /**
      *
@@ -28,7 +28,7 @@ public class ImImage {
      * @return
      * The attributes
      */
-    public Attributes getAttributes() {
+    public Attributes____ getAttributes() {
         return attributes;
     }
 
@@ -37,7 +37,7 @@ public class ImImage {
      * @param attributes
      * The attributes
      */
-    public void setAttributes(Attributes attributes) {
+    public void setAttributes(Attributes____ attributes) {
         this.attributes = attributes;
     }
 

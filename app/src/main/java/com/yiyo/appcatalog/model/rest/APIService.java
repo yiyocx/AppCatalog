@@ -1,6 +1,6 @@
 package com.yiyo.appcatalog.model.rest;
 
-import com.yiyo.appcatalog.model.entities.Feed;
+import com.yiyo.appcatalog.model.rest.models.Feed;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

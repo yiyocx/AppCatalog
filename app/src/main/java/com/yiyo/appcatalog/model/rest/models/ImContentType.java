@@ -1,15 +1,15 @@
-package com.yiyo.appcatalog.model.entities;
+package com.yiyo.appcatalog.model.rest.models;
 
-public class Link {
+public class ImContentType {
 
-    private Attributes___ attributes;
+    private Attributes__ attributes;
 
     /**
      *
      * @return
      * The attributes
      */
-    public Attributes___ getAttributes() {
+    public Attributes__ getAttributes() {
         return attributes;
     }
 
@@ -18,7 +18,7 @@ public class Link {
      * @param attributes
      * The attributes
      */
-    public void setAttributes(Attributes___ attributes) {
+    public void setAttributes(Attributes__ attributes) {
         this.attributes = attributes;
     }
 

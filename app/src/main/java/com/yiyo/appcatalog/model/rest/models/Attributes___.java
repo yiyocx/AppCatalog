@@ -1,4 +1,4 @@
-package com.yiyo.appcatalog.model.entities;
+package com.yiyo.appcatalog.model.rest.models;
 
 public class Attributes___ {
 
