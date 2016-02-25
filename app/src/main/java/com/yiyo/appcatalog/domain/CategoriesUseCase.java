@@ -19,28 +19,24 @@ public class CategoriesUseCase {
     }
 
     public void save(Feed_ feed) {
+        datasource.open();
         datasource.deleteAllFeed();
         long feedId = datasource.saveFeed(feed);
         datasource.saveEntryApps(feedId, feed.getEntry());
-    }
-
-    public List<String> getAllCategories() {
-        List<String> allCategories = datasource.getAllCategories();
-        return allCategories;
-    }
-
-
-
-    public void openDatabase() {
-        datasource.open();
-    }
-
-    public void closeDatabase() {
         datasource.close();
     }
 
+    public List<String> getAllCategories() {
+        datasource.open();
+        List<String> allCategories = datasource.getAllCategories();
+        datasource.close();
+        return allCategories;
+    }
+
     public String getTitle() {
+        datasource.open();
         String titleApp = datasource.getTitleApp();
+        datasource.close();
         return  titleApp;
     }
 }

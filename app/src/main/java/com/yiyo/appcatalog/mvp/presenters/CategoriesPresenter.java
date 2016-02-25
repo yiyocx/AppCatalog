@@ -20,17 +20,19 @@ public class CategoriesPresenter {
     }
 
     public void saveAndLoadCategories(Feed_ feed) {
-        categoriesUseCase.openDatabase();
         categoriesUseCase.save(feed);
         List<String> categories = categoriesUseCase.getAllCategories();
-        categoriesUseCase.closeDatabase();
         categoriesView.fetchCategories(categories);
     }
 
     public String getTitle() {
-        categoriesUseCase.openDatabase();
         String title = categoriesUseCase.getTitle();
-        categoriesUseCase.closeDatabase();
         return title;
+    }
+
+    public void loadOfflineCategories() {
+        categoriesUseCase.getAllCategories();
+        List<String> categories = categoriesUseCase.getAllCategories();
+        categoriesView.fetchCategories(categories);
     }
 }

@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
+import com.yiyo.appcatalog.R;
 import com.yiyo.appcatalog.model.entities.EntryApp;
 import com.yiyo.appcatalog.model.entities.Feed;
 import com.yiyo.appcatalog.model.rest.models.Entry;
@@ -22,8 +23,10 @@ public class AppsCatalogDatasource {
 
     private SQLiteDatabase database;
     private AppsCatalogDBHelper dbHelper;
+    private Context context;
 
     public AppsCatalogDatasource(Context context) {
+        this.context = context;
         dbHelper = new AppsCatalogDBHelper(context);
     }
 
@@ -95,8 +98,12 @@ public class AppsCatalogDatasource {
         Cursor cursor = database.query(Feed.TABLE_NAME, null, null, null, null,
                 null, null, null);
         cursor.moveToFirst();
-        String title = cursor.getString(cursor.getColumnIndex(Feed.COLUMN_TITLE));
-        cursor.close();
-        return title;
+
+        if (cursor.getCount() > 0) {
+            String title = cursor.getString(cursor.getColumnIndex(Feed.COLUMN_TITLE));
+            cursor.close();
+            return title;
+        }
+        return context.getString(R.string.categories_title);
     }
 }

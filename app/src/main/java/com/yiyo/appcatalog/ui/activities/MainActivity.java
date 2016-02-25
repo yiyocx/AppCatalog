@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements CategoriesView {
             @Override
             public void onFailure(Call<Feed> call, Throwable t) {
                 Log.e(MainActivity.class.getSimpleName(), t.getMessage());
+                categoriesPresenter.loadOfflineCategories();
+                onFakeCreate();
             }
         });
     }
