@@ -1,13 +1,15 @@
 package com.yiyo.appcatalog.ui.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.yiyo.appcatalog.R;
-import com.yiyo.appcatalog.model.database.AppsCatalogDatasource;
 import com.yiyo.appcatalog.model.entities.EntryApp;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import butterknife.ButterKnife;
 public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapter.ViewHolder> {
 
     private List<EntryApp> apps;
+    private Context context;
 
     public AppsCategoryAdapter() {
         apps = new ArrayList<>();
@@ -29,13 +32,21 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_app, parent, false);
+        context = parent.getContext();
+        View v = LayoutInflater.from(context).inflate(R.layout.item_app, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.appTitle.setText("Yiyo paso por here");
+        EntryApp entryApp = apps.get(position);
+        Picasso
+            .with(context)
+            .load(entryApp.img75)
+            .fit()
+            .centerCrop()
+            .into(holder.appIcon);
+        holder.appTitle.setText(entryApp.name);
     }
 
     @Override
@@ -43,7 +54,13 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
         return apps.size();
     }
 
+    public void addApps(List<EntryApp> apps) {
+        this.apps = apps;
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.app_icon) ImageView appIcon;
         @Bind(R.id.app_title) TextView appTitle;
 
         public ViewHolder(View itemView) {

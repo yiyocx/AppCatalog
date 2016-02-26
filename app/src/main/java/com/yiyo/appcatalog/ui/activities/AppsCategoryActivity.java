@@ -27,7 +27,7 @@ public class AppsCategoryActivity extends AppCompatActivity implements AppsCateg
         overridePendingTransition(R.anim.do_not_move, R.anim.do_not_move);
 
         setContentView(R.layout.activity_apps_category);
-        attachAppsCategoryFragment();
+        attachAppsCategoryFragment(category);
         rootLayout = findViewById(R.id.root_layout);
 
         if (savedInstanceState == null) {
@@ -49,11 +49,11 @@ public class AppsCategoryActivity extends AppCompatActivity implements AppsCateg
         setTitle(category);
     }
 
-    private void attachAppsCategoryFragment() {
+    private void attachAppsCategoryFragment(String category) {
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         Fragment fragment = supportFragmentManager.findFragmentById(R.id.category_container);
         if (!(fragment instanceof AppsCategoryFragment)) {
-            fragment = AppsCategoryFragment.newInstance();
+            fragment = AppsCategoryFragment.newInstance(category);
         }
         supportFragmentManager.beginTransaction()
                 .replace(R.id.category_container, fragment)

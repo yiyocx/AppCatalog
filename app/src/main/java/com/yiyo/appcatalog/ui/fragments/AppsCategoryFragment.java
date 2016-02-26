@@ -10,9 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yiyo.appcatalog.R;
+import com.yiyo.appcatalog.model.entities.EntryApp;
 import com.yiyo.appcatalog.mvp.presenters.AppsCategoryPresenter;
 import com.yiyo.appcatalog.mvp.views.AppsCategoryView;
 import com.yiyo.appcatalog.ui.adapters.AppsCategoryAdapter;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,6 +23,9 @@ import butterknife.ButterKnife;
 
 public class AppsCategoryFragment extends Fragment implements AppsCategoryView {
 
+    private static final String CATEGORY = "category";
+
+    private String category;
     private AppsCategoryPresenter appsCategoryPresenter;
     private OnFragmentInteractionListener callback;
     @Bind(R.id.apps_recycler) RecyclerView appsRecycler;
@@ -44,8 +50,20 @@ public class AppsCategoryFragment extends Fragment implements AppsCategoryView {
         }
     }
 
-    public static AppsCategoryFragment newInstance() {
-        return new AppsCategoryFragment();
+    public static AppsCategoryFragment newInstance(String category) {
+        AppsCategoryFragment fragment = new AppsCategoryFragment();
+        Bundle args = new Bundle();
+        args.putString(CATEGORY, category);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            category = getArguments().getString(CATEGORY);
+        }
     }
 
     @Override
@@ -74,7 +92,7 @@ public class AppsCategoryFragment extends Fragment implements AppsCategoryView {
     @Override
     public void onResume() {
         super.onResume();
-        appsCategoryPresenter.onResume();
+        appsCategoryPresenter.onResume(category);
     }
 
     @Override
@@ -85,5 +103,10 @@ public class AppsCategoryFragment extends Fragment implements AppsCategoryView {
     @Override
     public void hideProgress() {
         callback.onLoadedData();
+    }
+
+    @Override
+    public void showApps(List<EntryApp> apps) {
+        adapter.addApps(apps);
     }
 }

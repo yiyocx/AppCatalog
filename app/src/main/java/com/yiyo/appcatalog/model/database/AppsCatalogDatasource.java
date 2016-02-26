@@ -56,7 +56,7 @@ public class AppsCatalogDatasource {
 
     public void saveEntryApps(Long feedId, List<Entry> entries) {
         String sqlTemplate = "INSERT INTO " + EntryApp.TABLE_NAME +
-                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         SQLiteStatement statement = database.compileStatement(sqlTemplate);
         database.beginTransaction();
         for (Entry entry : entries) {
@@ -70,6 +70,9 @@ public class AppsCatalogDatasource {
             statement.bindString(8, entry.getImReleaseDate().getLabel());
             statement.bindString(9, entry.getImReleaseDate().getAttributes().getLabel());
             statement.bindLong(10, feedId);
+            statement.bindString(11, entry.getImImage().get(0).getLabel());
+            statement.bindString(12, entry.getImImage().get(1).getLabel());
+            statement.bindString(13, entry.getImImage().get(2).getLabel());
             statement.execute();
         }
         database.setTransactionSuccessful();
@@ -105,5 +108,37 @@ public class AppsCatalogDatasource {
             return title;
         }
         return context.getString(R.string.categories_title);
+    }
+
+    public List<EntryApp> listAppsByCategory(String category) {
+        Cursor cursor = database.query(EntryApp.TABLE_NAME, null, "category=?", new String[]{category},
+                null, null, null);
+        List<EntryApp> apps = new ArrayList<>();
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            EntryApp entryApp = cursorToEntryApp(cursor);
+            apps.add(entryApp);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return apps;
+    }
+
+    private EntryApp cursorToEntryApp(Cursor cursor) {
+        EntryApp entryApp = new EntryApp();
+        entryApp.id = cursor.getLong(cursor.getColumnIndex(EntryApp.COLUMN_ID));
+        entryApp.name = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_NAME));
+        entryApp.summary = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_SUMMARY));
+        entryApp.rights = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_RIGHTS));
+        entryApp.title = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_TITLE));
+        entryApp.artist = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_ARTIST));
+        entryApp.category = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_CATEGORY));
+        entryApp.releaseDate = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_RELEASE_DATE));
+        entryApp.releaseDateLabel = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_RELEASE_DATE_LABEL));
+        entryApp.feedId = cursor.getLong(cursor.getColumnIndex(EntryApp.COLUMN_FEED_ID));
+        entryApp.img53 = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_IMG_53));
+        entryApp.img75 = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_IMG_75));
+        entryApp.img100 = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_IMG_100));
+        return entryApp;
     }
 }

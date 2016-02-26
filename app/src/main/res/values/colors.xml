@@ -5,4 +5,5 @@
     <color name="colorAccent">#607D8B</color>
 
     <color name="grey">#E2E2E2</color>
+    <color name="touch_effect">#9ccc</color>
 </resources>
