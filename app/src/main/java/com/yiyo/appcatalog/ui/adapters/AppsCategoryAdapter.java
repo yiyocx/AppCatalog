@@ -42,11 +42,11 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
         EntryApp entryApp = apps.get(position);
         Picasso
             .with(context)
-            .load(entryApp.img75)
-            .fit()
-            .centerCrop()
+            .load(entryApp.img100)
+            .placeholder(R.drawable.img_face)
             .into(holder.appIcon);
         holder.appTitle.setText(entryApp.name);
+        holder.appSummary.setText(entryApp.summary);
     }
 
     @Override
@@ -62,6 +62,7 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
     class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.app_icon) ImageView appIcon;
         @Bind(R.id.app_title) TextView appTitle;
+        @Bind(R.id.app_summary) TextView appSummary;
 
         public ViewHolder(View itemView) {
             super(itemView);
