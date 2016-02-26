@@ -32,12 +32,21 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         String category = categories.get(position);
         holder.categoryText.setText(category);
         Random random = new Random();
         holder.categoryColor.setBackgroundColor(Color.argb(255, random.nextInt(255),
                 random.nextInt(255), random.nextInt(255)));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String category = categories.get(position);
+                Intent intent = new Intent(v.getContext(), AppsCategoryActivity.class);
+                intent.putExtra("category", category);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -58,13 +67,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         public ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(itemView.getContext(), AppsCategoryActivity.class);
-                    itemView.getContext().startActivity(intent);
-                }
-            });
         }
     }
 }
