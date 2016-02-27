@@ -1,6 +1,5 @@
 package com.yiyo.appcatalog.ui.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -77,14 +76,11 @@ public class AppsCategoryFragment extends Fragment implements AppsCategoryView {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setupGrid();
+        setupAdapter();
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void setupGrid() {
-        final int spacing = getContext().getResources()
-                .getDimensionPixelSize(R.dimen.spacing);
-//        appsRecycler.addItemDecoration(new OffsetDecoration(spacing));
+    private void setupAdapter() {
         adapter = new AppsCategoryAdapter();
         appsRecycler.setAdapter(adapter);
     }

@@ -43,7 +43,7 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
         Picasso
             .with(context)
             .load(entryApp.img100)
-            .placeholder(R.drawable.img_face)
+            .placeholder(R.drawable.iphone_app)
             .into(holder.appIcon);
         holder.appTitle.setText(entryApp.name);
         holder.appSummary.setText(entryApp.summary);
