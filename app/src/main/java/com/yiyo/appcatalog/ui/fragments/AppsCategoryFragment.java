@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.yiyo.appcatalog.R;
 import com.yiyo.appcatalog.model.entities.EntryApp;
@@ -82,6 +83,12 @@ public class AppsCategoryFragment extends Fragment implements AppsCategoryView {
 
     private void setupAdapter() {
         adapter = new AppsCategoryAdapter();
+        adapter.setOnItemClickListener(new AppsCategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Toast.makeText(getActivity(), "Me tocaste en la posición: " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
         appsRecycler.setAdapter(adapter);
     }
 

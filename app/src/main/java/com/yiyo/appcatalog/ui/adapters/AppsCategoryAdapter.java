@@ -23,6 +23,12 @@ import butterknife.ButterKnife;
  */
 public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapter.ViewHolder> {
 
+    public interface OnItemClickListener {
+        void onClick(View v, int position);
+    }
+
+    private OnItemClickListener onItemClickListener;
+
     private List<EntryApp> apps;
     private Context context;
 
@@ -38,7 +44,7 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         EntryApp entryApp = apps.get(position);
         Picasso
             .with(context)
@@ -47,6 +53,12 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
             .into(holder.appIcon);
         holder.appTitle.setText(entryApp.name);
         holder.appSummary.setText(entryApp.summary);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onClick(v, position);
+            }
+        });
     }
 
     @Override
@@ -57,6 +69,10 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
     public void addApps(List<EntryApp> apps) {
         this.apps = apps;
         notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
