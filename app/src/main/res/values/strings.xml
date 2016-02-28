@@ -2,4 +2,7 @@
     <string name="app_name">Apps Catalog</string>
     <string name="categories_title">iOS Apps Catalog</string>
     <string name="title_activity_apps_category">Categoria</string>
+    <string name="transition_toolbar">ToolbarTransition</string>
+    <string name="title_activity_detail_app">Detail App</string>
+    <string name="action_settings">Settings</string>
 </resources>

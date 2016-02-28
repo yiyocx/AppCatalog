@@ -25,7 +25,17 @@
             android:label="@string/title_activity_apps_category"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.activities.CategorySelectionActivity"
-            android:theme="@style/Theme.Transparent"></activity>
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".ui.activities.DetailAppActivity"
+            android:label="@string/title_activity_detail_app"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.activities.AppsCategoryActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.yiyo.appcatalog.ui.activities.AppsCategoryActivity" />
+        </activity>
     </application>
 
 </manifest>

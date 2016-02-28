@@ -141,4 +141,11 @@ public class AppsCatalogDatasource {
         entryApp.img100 = cursor.getString(cursor.getColumnIndex(EntryApp.COLUMN_IMG_100));
         return entryApp;
     }
+
+    public EntryApp findApp(Long appId) {
+        Cursor cursor = database.query(EntryApp.TABLE_NAME, null, EntryApp.COLUMN_ID + "=?", new String[]{String.valueOf(appId)},
+                null, null, null);
+        cursor.moveToFirst();
+        return cursorToEntryApp(cursor);
+    }
 }

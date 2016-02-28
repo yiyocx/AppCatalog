@@ -1,19 +1,25 @@
 package com.yiyo.appcatalog.ui.fragments;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.yiyo.appcatalog.R;
 import com.yiyo.appcatalog.model.entities.EntryApp;
 import com.yiyo.appcatalog.mvp.presenters.AppsCategoryPresenter;
 import com.yiyo.appcatalog.mvp.views.AppsCategoryView;
+import com.yiyo.appcatalog.ui.activities.DetailAppActivity;
 import com.yiyo.appcatalog.ui.adapters.AppsCategoryAdapter;
+import com.yiyo.appcatalog.utils.TransitionHelper;
 
 import java.util.List;
 
@@ -86,10 +92,26 @@ public class AppsCategoryFragment extends Fragment implements AppsCategoryView {
         adapter.setOnItemClickListener(new AppsCategoryAdapter.OnItemClickListener() {
             @Override
             public void onClick(View v, int position) {
-                Toast.makeText(getActivity(), "Me tocaste en la posición: " + position, Toast.LENGTH_SHORT).show();
+                startDetailActivityWithTransition(getActivity(),
+                        v.findViewById(R.id.app_title),
+                        adapter.getItem(position));
             }
         });
         appsRecycler.setAdapter(adapter);
+    }
+
+    private void startDetailActivityWithTransition(Activity activity, View toolbar, EntryApp app) {
+        final Pair[] pairs = TransitionHelper.createSafeTransitionParticipants(activity, false,
+                new Pair<>(toolbar, activity.getString(R.string.transition_toolbar)));
+
+        ActivityOptionsCompat sceneTransitionAnimation = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, pairs);
+
+        // Start the activity with the participants, animating from one to the other.
+        final Bundle transitionBundle = sceneTransitionAnimation.toBundle();
+        Intent startIntent = new Intent(getContext(), DetailAppActivity.class);
+        startIntent.putExtra(DetailAppActivity.APP_ID, app.id);
+        ActivityCompat.startActivity(activity, startIntent, transitionBundle);
     }
 
     @Override

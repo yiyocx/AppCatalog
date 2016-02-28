@@ -27,7 +27,7 @@
             android:layout_toRightOf="@+id/app_icon"
             android:layout_toEndOf="@+id/app_icon"
             android:layout_centerVertical="true"
-            android:padding="@dimen/spacing_double" >
+            android:padding="8dp" >
 
             <TextView
                 android:id="@+id/app_title"
@@ -36,6 +36,8 @@
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:text="App Name"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/padding_start_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                  />
 

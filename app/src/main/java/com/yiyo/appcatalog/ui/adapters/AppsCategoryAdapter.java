@@ -75,6 +75,10 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
         this.onItemClickListener = onItemClickListener;
     }
 
+    public EntryApp getItem(int position) {
+        return apps.get(position);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.app_icon) ImageView appIcon;
         @Bind(R.id.app_title) TextView appTitle;
