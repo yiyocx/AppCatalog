@@ -1,8 +1,6 @@
 package com.yiyo.appcatalog.ui.activities;
 
 import android.animation.Animator;
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,5 +1,6 @@
 package com.yiyo.appcatalog.mvp.presenters;
 
+import com.yiyo.appcatalog.R;
 import com.yiyo.appcatalog.domain.CategoriesUseCase;
 import com.yiyo.appcatalog.model.rest.models.Feed_;
 import com.yiyo.appcatalog.mvp.views.CategoriesView;
@@ -22,6 +23,7 @@ public class CategoriesPresenter {
     public void saveAndLoadCategories(Feed_ feed) {
         categoriesUseCase.save(feed);
         List<String> categories = categoriesUseCase.getAllCategories();
+        categories.add("All Categories");
         categoriesView.fetchCategories(categories);
     }
 
@@ -33,6 +35,7 @@ public class CategoriesPresenter {
     public void loadOfflineCategories() {
         categoriesUseCase.getAllCategories();
         List<String> categories = categoriesUseCase.getAllCategories();
+        categories.add(categoriesView.getContext().getResources().getString(R.string.all_categories));
         categoriesView.fetchCategories(categories);
     }
 }

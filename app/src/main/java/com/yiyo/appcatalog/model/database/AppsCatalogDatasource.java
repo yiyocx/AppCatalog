@@ -111,8 +111,13 @@ public class AppsCatalogDatasource {
     }
 
     public List<EntryApp> listAppsByCategory(String category) {
-        Cursor cursor = database.query(EntryApp.TABLE_NAME, null, "category=?", new String[]{category},
-                null, null, null);
+        Cursor cursor;
+        if (category.equals(context.getResources().getString(R.string.all_categories))) {
+            cursor = database.query(EntryApp.TABLE_NAME, null, null, null, null, null, null);
+        } else {
+            cursor = database.query(EntryApp.TABLE_NAME, null, "category=?", new String[]{category},
+                    null, null, null);
+        }
         List<EntryApp> apps = new ArrayList<>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
