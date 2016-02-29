@@ -61,7 +61,6 @@ public class AppsCategoryActivity extends AppCompatActivity implements AppsCateg
         findViewById(R.id.progress).setVisibility(visibility);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void circularRevealActivity() {
 
         int cx = rootLayout.getWidth() / 2;
@@ -70,12 +69,18 @@ public class AppsCategoryActivity extends AppCompatActivity implements AppsCateg
         float finalRadius = Math.max(rootLayout.getWidth(), rootLayout.getHeight());
 
         // create the animator for this view (the start radius is zero)
-        final Animator circularReveal = ViewAnimationUtils.createCircularReveal(rootLayout, cx, cy, 0, finalRadius);
-        circularReveal.setDuration(1000);
+        final Animator circularReveal;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            circularReveal = ViewAnimationUtils.createCircularReveal(rootLayout, cx, cy, 0, finalRadius);
+            circularReveal.setDuration(1000);
 
-        // make the view visible and start the animation
-        rootLayout.setVisibility(View.VISIBLE);
-        circularReveal.start();
+            // make the view visible and start the animation
+            rootLayout.setVisibility(View.VISIBLE);
+            circularReveal.start();
+        } else {
+            // make the view visible
+            rootLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

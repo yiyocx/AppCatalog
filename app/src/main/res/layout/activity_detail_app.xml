@@ -25,14 +25,13 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:gravity="center_vertical"
             android:transitionName="@string/transition_toolbar"
-            tools:ignore="UnusedAttribute,NewApi,RtlSymmetry,PrivateResource" />
+            tools:ignore="RtlSymmetry" />
 
         <ImageButton android:id="@+id/back"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:padding="@dimen/spacing_double"
             android:src="@drawable/ic_arrow_back"
-            android:tint="?android:textColorPrimary"
             android:layout_gravity="start|center_vertical"
             android:background="@drawable/selector_subtle"/>
     </FrameLayout>

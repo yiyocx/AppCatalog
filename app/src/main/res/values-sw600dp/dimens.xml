@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="spacing_double">24dp</dimen>
+    <dimen name="padding_arrow_landscape">16dp</dimen>
 </resources>
