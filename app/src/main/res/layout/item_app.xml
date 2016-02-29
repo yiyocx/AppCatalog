@@ -39,6 +39,7 @@
                 android:background="@color/colorPrimary"
                 android:padding="@dimen/padding_start_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@android:color/white"
                  />
 
             <TextView
