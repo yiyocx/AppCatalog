@@ -9,9 +9,10 @@
     <!-- Fake a toolbar for easier animations -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <TextView android:id="@+id/app_title"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="72dp"
@@ -57,7 +58,8 @@
         <FrameLayout android:id="@+id/app_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="invisible"/>
+            android:layout_gravity="center" >
+            <include layout="@layout/fragment_detail_app" />
+        </FrameLayout>
     </FrameLayout>
 </LinearLayout>

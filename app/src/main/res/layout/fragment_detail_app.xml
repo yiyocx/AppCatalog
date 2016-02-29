@@ -1,13 +1,145 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.yiyo.appcatalog.ui.activities.DetailAppActivityFragment"
+    android:background="@color/blue_grey_200"
     tools:showIn="@layout/activity_detail_app">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.DetailAppFragment">
 
-</RelativeLayout>
+        <android.support.v7.widget.CardView
+            xmlns:cardview="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            cardview:contentPadding="@dimen/app_info_padding"
+            cardview:cardElevation="0dp"
+            cardview:cardCornerRadius="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/app_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="@dimen/app_info_padding"
+                    android:src="@drawable/iphone_app"/>
+
+                <TextView
+                    android:id="@+id/app_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/app_image"
+                    android:layout_toEndOf="@id/app_image"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:text="App Name"
+                    />
+
+                <TextView
+                    android:id="@+id/app_artist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/app_name"
+                    android:layout_toRightOf="@id/app_image"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="Artist"
+                    />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:cardview="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            cardview:contentPadding="@dimen/app_info_padding"
+            cardview:cardElevation="0dp"
+            cardview:cardCornerRadius="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DESCRIPTION"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:paddingBottom="4dp"
+                    />
+
+                <TextView
+                    android:id="@+id/app_summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:text="Summary"
+                    />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:cardview="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            cardview:contentPadding="@dimen/app_info_padding"
+            cardview:cardElevation="0dp"
+            cardview:cardCornerRadius="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/app_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="4dp"
+                    android:text="Full Title"
+                    />
+
+                <TextView
+                    android:id="@+id/release_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:layout_below="@id/app_title"
+                    android:text="Released in "
+                    />
+
+                <TextView
+                    android:id="@+id/app_release_date_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="4dp"
+                    android:text="Some date"
+                    android:layout_below="@id/app_title"
+                    android:layout_toRightOf="@id/release_label"
+                    />
+
+                <TextView
+                    android:id="@+id/app_rights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All rights reserved"
+                    android:layout_below="@id/app_release_date_label"
+                    />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

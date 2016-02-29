@@ -1,33 +1,29 @@
 package com.yiyo.appcatalog.ui.activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.yiyo.appcatalog.R;
-import com.yiyo.appcatalog.model.entities.EntryApp;
-import com.yiyo.appcatalog.mvp.presenters.DetailAppPresenter;
+import com.yiyo.appcatalog.ui.fragments.DetailAppFragment;
 import com.yiyo.appcatalog.utils.TextSharedElementCallback;
 
 import java.util.List;
 
 public class DetailAppActivity extends AppCompatActivity {
 
-    public static final String APP_ID = "app_id";
-    private DetailAppPresenter detailAppPresenter;
+    private static final String FRAGMENT_TAG = "DetailApp";
+
     private View toolbarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        detailAppPresenter = new DetailAppPresenter();
-
-        // Get the data of the selected app from its id
-        Long appId = getIntent().getLongExtra(APP_ID, -1);
-        loadApp(appId);
+        setContentView(R.layout.activity_detail_app);
+        setupToolbar();
 
         int appNameTextSize = getResources()
                 .getDimensionPixelSize(R.dimen.app_text_size);
@@ -64,15 +60,15 @@ public class DetailAppActivity extends AppCompatActivity {
                 });
     }
 
-    private void loadApp(Long appId) {
-        if (appId == -1) {
-            Log.w(DetailAppActivity.class.getSimpleName(), "Didn't find an app. Finishing");
-            finish();
-        }
-
-        EntryApp entryApp = detailAppPresenter.findApp(appId, DetailAppActivity.this);
-        setContentView(R.layout.activity_detail_app);
-        setupToolbar();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        long appId = getIntent().getLongExtra(DetailAppFragment.APP_ID, -1);
+        DetailAppFragment fragment = DetailAppFragment.newInstance(appId);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.app_fragment_container, fragment, FRAGMENT_TAG)
+                .commit();
     }
 
     private void setupToolbar() {
@@ -83,6 +79,11 @@ public class DetailAppActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            int spacingDouble = getResources().getDimensionPixelSize(R.dimen.spacing_double);
+            int paddingLandscape = getResources().getDimensionPixelSize(R.dimen.padding_arrow_landscape);
+            toolbarBack.setPadding(spacingDouble, paddingLandscape, paddingLandscape, spacingDouble);
+        }
     }
 
 }

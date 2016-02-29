@@ -10,4 +10,6 @@
 
     <dimen name="app_text_size">14sp</dimen>
     <dimen name="padding_start_title">4dp</dimen>
+    <dimen name="padding_arrow_landscape">8dp</dimen>
+    <dimen name="app_info_padding">12dp</dimen>
 </resources>

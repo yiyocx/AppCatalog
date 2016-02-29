@@ -110,7 +110,7 @@ public class AppsCategoryFragment extends Fragment implements AppsCategoryView {
         // Start the activity with the participants, animating from one to the other.
         final Bundle transitionBundle = sceneTransitionAnimation.toBundle();
         Intent startIntent = new Intent(getContext(), DetailAppActivity.class);
-        startIntent.putExtra(DetailAppActivity.APP_ID, app.id);
+        startIntent.putExtra(DetailAppFragment.APP_ID, app.id);
         ActivityCompat.startActivity(activity, startIntent, transitionBundle);
     }
 
