@@ -94,15 +94,17 @@ public class AppsCategoryFragment extends Fragment implements AppsCategoryView {
             public void onClick(View v, int position) {
                 startDetailActivityWithTransition(getActivity(),
                         v.findViewById(R.id.app_title),
+                        v.findViewById(R.id.app_icon),
                         adapter.getItem(position));
             }
         });
         appsRecycler.setAdapter(adapter);
     }
 
-    private void startDetailActivityWithTransition(Activity activity, View toolbar, EntryApp app) {
+    private void startDetailActivityWithTransition(Activity activity, View toolbar, View icon, EntryApp app) {
         final Pair[] pairs = TransitionHelper.createSafeTransitionParticipants(activity, false,
-                new Pair<>(toolbar, activity.getString(R.string.transition_toolbar)));
+                new Pair<>(toolbar, activity.getString(R.string.transition_toolbar)),
+                new Pair<>(icon, activity.getString(R.string.transition_icon)));
 
         ActivityOptionsCompat sceneTransitionAnimation = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(activity, pairs);

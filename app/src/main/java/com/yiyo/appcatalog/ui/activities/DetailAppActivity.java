@@ -1,10 +1,12 @@
 package com.yiyo.appcatalog.ui.activities;
 
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
 import android.view.View;
 
 import com.yiyo.appcatalog.R;
@@ -58,6 +60,11 @@ public class DetailAppActivity extends AppCompatActivity {
                                 .alpha(1f);
                     }
                 });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // set an exit transition
+            getWindow().setEnterTransition(new Explode());
+        }
     }
 
     @Override

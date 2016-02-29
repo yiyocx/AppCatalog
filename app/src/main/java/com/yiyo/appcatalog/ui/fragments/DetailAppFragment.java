@@ -2,6 +2,8 @@ package com.yiyo.appcatalog.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +43,7 @@ public class DetailAppFragment extends Fragment implements DetailAppView {
         fragment.setArguments(args);
         return fragment;
     }
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,7 +69,8 @@ public class DetailAppFragment extends Fragment implements DetailAppView {
     public void populateApp(EntryApp entryApp) {
         Picasso.with(getContext())
             .load(entryApp.img100)
-            .placeholder(R.drawable.iphone_app)
+            .noPlaceholder()
+            .noFade()
             .fit()
             .centerCrop()
             .into(appImage);

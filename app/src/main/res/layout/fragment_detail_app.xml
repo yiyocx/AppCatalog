@@ -30,7 +30,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginRight="@dimen/app_info_padding"
-                    android:src="@drawable/iphone_app"/>
+                    android:transitionName="@string/transition_icon"/>
 
                 <TextView
                     android:id="@+id/app_name"
