@@ -55,7 +55,7 @@ public class CategorySelectionActivity extends AppCompatActivity implements Cate
         apiService.getTopFreeiOSApps().enqueue(new Callback<Feed>() {
             @Override
             public void onResponse(Call<Feed> call, Response<Feed> response) {
-                if (response.isSuccess()) {
+                if (response.isSuccessful()) {
                     categoriesPresenter.saveAndLoadCategories(response.body().getFeed());
                     onFakeCreate();
                 }

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.yiyo.appcatalog.R;
 import com.yiyo.appcatalog.model.entities.EntryApp;
 
@@ -46,7 +46,7 @@ public class AppsCategoryAdapter extends RecyclerView.Adapter<AppsCategoryAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         EntryApp entryApp = apps.get(position);
-        Picasso
+        Glide
             .with(context)
             .load(entryApp.img100)
             .placeholder(R.drawable.iphone_app)
